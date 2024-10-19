@@ -8,6 +8,7 @@ def verificar_memoria(endereco: int) -> int:
 
 def executar_comandos(comandos: list) -> None:
     type_comando = comandos[0]
+    
     match(type_comando):
         case 'R':
             executar_comando_r(comandos)
@@ -18,23 +19,38 @@ def executar_comandos(comandos: list) -> None:
         case _:
             return None
         
-def executar_comando_r(comando: list) -> None:
-    match(comando[1]):
+def executar_comando_r(comandos: list) -> None:
+    rs2 = comandos[3]
+    rs2_dado = verificar_memoria(rs2)
+    rs1 = comandos[2]
+    rs1_dado = verificar_memoria(rs1)
+    rd = comandos[4]
+    
+    match(comandos[1]):
         case 'ADD':
-            print(f'ADD {comando[2]}, {comando[3]}, {comando[4]}')
+            memoria[rd] = rs1_dado + rs2_dado
+            print(f'ADD {comandos[2]}, {comandos[3]}, {comandos[4]}\n {memoria}')
         case 'SUB':
-            print(f'SUB {comando[2]}, {comando[3]}, {comando[4]}')
+            memoria[rd] = rs1_dado - rs2_dado
+            print(f'SUB {comandos[2]}, {comandos[3]}, {comandos[4]}\n {memoria}')
         case 'SLL':
-            print(f'SLL {comando[2]}, {comando[3]}, {comando[4]}')
+            memoria[rd] = rs1_dado << rs2_dado
+            print(f'SLL {comandos[2]}, {comandos[3]}, {comandos[4]}\n {memoria}')
         case 'SLT':
-            print(f'SLT {comando[2]}, {comando[3]}, {comando[4]}')
+            memoria[rd] = 1 if rs1_dado < rs2_dado else 0
+            print(f'SLT {comandos[2]}, {comandos[3]}, {comandos[4]}\n {memoria}')
         case _:
             return None
         
-def executar_comando_i(comando: list) -> None:
-    match(comando[1]):
+def executar_comando_i(comandos: list) -> None:
+    imm = comandos[4]
+    rs1 = comandos[2]
+    rs1_dado = verificar_memoria(rs1)
+    rd = comandos[3]
+    match(comandos[1]):
         case 'ADDI':
-            print(f'ADDI {comando[2]}, {comando[3]}, {comando[4]}')
+            memoria[rd] = rs1_dado + imm
+            print(f'ADDI {comandos[2]}, {comandos[3]}, {comandos[4]}\n {memoria}')
         case _:
             return None
         
