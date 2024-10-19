@@ -1,8 +1,13 @@
 from tela_entrada_dados import tela_entrada
 from tela_erro import tela_erro
-import tratamento_codigo
-from ler_comandos import ler_comandos
+from tela_resultados import tela_resultados
 from executar_comandos import executar_comandos
+from ler_comandos import ler_comandos
+import tratamento_codigo
+
+historico_comandos = []
+historico_comandos_formatados = []
+historico_memoria = []
 
 if '__main__' == __name__:
     codigo = tela_entrada()
@@ -17,7 +22,15 @@ if '__main__' == __name__:
         codigo = tela_entrada()
     
     linhas_codigo = tratamento_codigo.separar_codigo(codigo)
+    
     for linha in linhas_codigo:
         comando = ler_comandos(linha)
-        executar_comandos(comando)
+        historico_comandos.append(comando)
+        (memoria, ultimo_comando) = executar_comandos(comando)
+        historico_comandos_formatados.append(ultimo_comando)
+        historico_memoria.append(memoria)
+        
+    tela_resultados(historico_comandos, historico_memoria, historico_comandos_formatados)
+        
+    
         
