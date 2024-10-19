@@ -29,6 +29,9 @@ def tela_entrada() -> str:
     submeter_codigo = tk.Button(root, text="Submeter código", command=submeter_codigo)
     submeter_codigo.pack(side=tk.RIGHT, padx=10, pady=10)
     
+    root.attributes('-topmost', True)
+    area_texto.focus_set()
+    
     root.mainloop()
     
     return codigo[0] if codigo else None
