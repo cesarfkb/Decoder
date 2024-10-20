@@ -18,11 +18,13 @@ def executar_comandos(comandos: list) -> tuple:
         case 'S':
             executar_comando_s(comandos)
         case _:
-            return (None, None)
+            return None
         
     return (memoria, ultimo_comando)
         
 def executar_comando_r(comandos: list) -> None:
+    global ultimo_comando
+    
     rs2 = comandos[3]
     rs2_dado = verificar_memoria(rs2)
     rs1 = comandos[2]
@@ -43,14 +45,17 @@ def executar_comando_r(comandos: list) -> None:
             memoria[rd] = 1 if rs1_dado < rs2_dado else 0
             # print(f'SLT {comandos[2]}, {comandos[3]}, {comandos[4]}\n {memoria}')
         case _:
-            return None
+            ultimo_comando = None
+            return
         
-    global ultimo_comando
+    
     ultimo_comando = f'[{comandos[0]}-type {comandos[1]}]\nrs1: {rs1} valor atual: {rs1_dado}\nrs2: {rs2} valor atual: {rs2_dado}\nrd: {rd} -> {memoria[rd]}'
         
     
         
 def executar_comando_i(comandos: list) -> None:
+    global ultimo_comando
+    
     imm = comandos[4]
     rs1 = comandos[2]
     rs1_dado = verificar_memoria(rs1)
@@ -61,9 +66,9 @@ def executar_comando_i(comandos: list) -> None:
             memoria[rd] = rs1_dado + imm
             # print(f'ADDI {comandos[2]}, {comandos[3]}, {comandos[4]}\n {memoria}')
         case _:
-            return None
+            ultimo_comando = None
+            return
         
-    global ultimo_comando
     ultimo_comando = f'[{comandos[0]}-type {comandos[1]}]\nrs1: {rs1} valor atual: {rs1_dado}\nimm: {imm}\nrd: {rd} -> {memoria[rd]}'
         
 def executar_comando_s(comando: list) -> None:

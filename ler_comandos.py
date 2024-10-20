@@ -14,7 +14,7 @@ def ler_comandos(codigo: str) -> list:
         case 'S':
             return get_comando_s(codigo)
         case _:
-            return None
+            return '1'
 
 def get_opcode(codigo: str) -> str:
     return OPCODES.get(int(codigo[-7:], 2))
@@ -25,6 +25,10 @@ def get_comando_r(linha: str) -> list:
     rs1 = linha[12:17]
     funct3 = linha[17:20]
     rd = linha[20:25]
+    
+    if COMANDOS_R.get((funct7, funct3)) is None:
+        return '2'
+    
     return ['R', COMANDOS_R.get((funct7, funct3)), hex(int(rs1, 2)), hex(int(rs2, 2)), hex(int(rd, 2))]
 
 def get_comando_i(linha: str) -> list:
@@ -32,6 +36,10 @@ def get_comando_i(linha: str) -> list:
     rs1 = linha[12:17]
     funct3 = linha[17:20]
     rd = linha[20:25]
+    
+    if COMANDOS_I.get(funct3) is None:
+        return '2'
+    
     return ['I', COMANDOS_I.get(funct3), hex(int(rs1, 2)), hex(int(rd, 2)), int(imm, 2)]
 
 def get_comando_s(linha: str) -> list:
@@ -39,5 +47,9 @@ def get_comando_s(linha: str) -> list:
     rs2 = linha[12:17]
     rs1 = linha[17:22]
     funct3 = linha[22:25]
+    
+    if COMANDOS_S.get(funct3) is None:
+        return '2'
+    
     return ['S', COMANDOS_S.get(funct3), hex(int(rs1, 2)), hex(int(rs2, 2)), int(imm, 2)]
 
