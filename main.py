@@ -25,8 +25,23 @@ if '__main__' == __name__:
     
     for linha in linhas_codigo:
         comando = ler_comandos(linha)
+        
+        if comando == '1':
+            tela_erro('OPCODE')
+            continue
+        elif comando == '2':
+            tela_erro('FUNC')
+            continue
+            
         historico_comandos.append(comando)
-        (memoria, ultimo_comando) = executar_comandos(comando)
+        tupla_resposta = executar_comandos(comando)
+        
+        if tupla_resposta is None or tupla_resposta[1] is None:
+            tela_erro('GENERIC')
+            continue
+        
+        (memoria, ultimo_comando) = tupla_resposta
+        
         historico_comandos_formatados.append(ultimo_comando)
         historico_memoria.append(memoria)
         
