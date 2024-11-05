@@ -21,3 +21,6 @@ A aplicação decodifica instruções binárias e realiza uma simulação de sua
 ```
 
 O código de exemplo é uma sequência de ADDI, ADD, ADD e SUB. A memória final esperada é `{'0x2': 12, '0x1': 6, '0x3': 6}`
+
+
+César Fukushima Kim Bresciani - 21.00478-0
