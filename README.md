@@ -29,7 +29,7 @@ Atualmente os seguintes comandos são suportados:
  - I-Type: ADDI
 
 ### Comandos sendo implementados
-Os seguintes comandos podem ser reconhecidos pelos programas, mas sua execução correta não é garantida:
+Os seguintes comandos podem ser reconhecidos pelo programa, mas sua execução correta não é garantida:
 
  - R-Type: XOR, OR, AND
  - I-Type: XOI, ORI, ANDI
