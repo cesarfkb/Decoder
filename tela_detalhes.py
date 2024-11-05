@@ -22,4 +22,6 @@ def tela_detalhes(comandos: list) -> None:
     done_button = tk.Button(root, text="Fechar", command=done)
     done_button.pack(side=tk.LEFT, padx=20, pady=20)
     
+    root.geometry("400x400")
+    
     root.mainloop()
