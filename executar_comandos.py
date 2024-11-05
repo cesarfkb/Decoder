@@ -87,16 +87,18 @@ def executar_comando_s(comandos: list) -> None:
     global ultimo_comando
     
     imm = comandos[4]
+    rs2 = comandos[3]
+    rs2_dado = verificar_memoria(rs2)
     rs1 = comandos[2]
     rs1_dado = verificar_memoria(rs1)
-    rd = comandos[3]
+    
     
     match(comandos[1]):
         case 'SB':
-            memoria[rs1_dado + imm] = rd
+            memoria[rs1_dado + imm] = rs2_dado
         case 'SH':
-            memoria[rs1_dado + imm] = rd
+            memoria[rs1_dado + imm] = rs2_dado
         case 'SW':
-            memoria[rs1_dado + imm] = rd
+            memoria[rs1_dado + imm] = rs2_dado
         case _:
             return None
