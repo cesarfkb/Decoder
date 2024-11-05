@@ -1,15 +1,10 @@
 import re
+from utils_comandos import *
 # codigo="00000000001100010000001110110011\n01000000101100111000011110110011\n00000000111111011001010100110011\n00000000101110010010100110110011\n00000001100101110100011000110011\n00000001111011010110011100110011\n00000001010010010111101110110011\n00000000001000011010010010000011\n00000011101101111010000010100011\n00000000001100001000000001100011\n00000000001100010000001110110011\n00000000001100010000001110110011"
 codigo = "00000000011000010000000010000011\n00000000000100010000000100110011\n00000000000100010000000100110011\n01000000000100010000000110110011"
 
 codigo = codigo.replace('\n', '')
 bits = []
-
-comandos_r = {('0100000', '000'): 'SUB', ('0000000', '000'): 'ADD',
-              ('0000000', '001'): 'SLL', ('0000000', '010'): 'SLT'}
-comandos_i = {'000': 'ADDI'}
-comandos_s = {'000': 'SB', '001': 'SH', '010': 'SW'}
-opcodes = {51: 'R', 3: 'I', 35: 'S', 99: 'SB'}
 memoria = {}
 
 
@@ -55,14 +50,14 @@ def ler_func_r(linha: str):
     rd = linha[20:25]
     verificar_memoria(converter_binario(rd))
     comando = (funct7, funct3)
-    print(comandos_r.get(comando), "rs1:", converter_binario(rs1),
+    print(COMANDOS_R.get(comando), "rs1:", converter_binario(rs1),
           "rs2:", converter_binario(rs2), "rd:", converter_binario(rd))
     executar_comando_r(comando, converter_binario(
         rs1),  converter_binario(rs2),  converter_binario(rd))
 
 
 def executar_comando_r(comando: tuple, rs1: int, rs2: int, rd: int):
-    match (comandos_r.get(comando)):
+    match (COMANDOS_R.get(comando)):
         case 'SUB':
             memoria[rd] = memoria[rs1] - memoria[rs2]
         case 'ADD':
@@ -81,14 +76,14 @@ def ler_func_i(linha: str):
     rd = linha[20:25]
     verificar_memoria(converter_binario(rd))
     comando = funct3
-    print(comandos_i.get(comando), "rs1:", converter_binario(rs1),
+    print(COMANDOS_I.get(comando), "rs1:", converter_binario(rs1),
           "rd:", converter_binario(rd), "imm:", converter_binario(imm))
     executar_comando_i(comando, converter_binario(
         rs1), converter_binario(rd), converter_binario(imm))
 
 
 def executar_comando_i(comando: str, rs1: int, rd: int, imm: int):
-    match (comandos_i.get(comando)):
+    match (COMANDOS_I.get(comando)):
         case 'ADDI':
             memoria[rd] = memoria[rs1] + imm
 
@@ -104,7 +99,7 @@ def ler_func_s(linha: str):
 
 
 def ler_linha(linha: str):
-    match (opcodes.get(get_opcode(linha))):
+    match (OPCODES.get(get_opcode(linha))):
         case 'R':
             ler_func_r(linha)
         case 'I':
