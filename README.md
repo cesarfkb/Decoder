@@ -6,7 +6,7 @@ A aplicação decodifica instruções binárias e realiza uma simulação de sua
 
 1.  Execute o arquivo `main.py`:
     
-    ```python  main.py```
+    ```python main.py```
     
 2.  Use a interface para carregar um arquivo ou escrever o código.
 3.  Submeta o código para ver os resultados.
