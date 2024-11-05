@@ -22,5 +22,17 @@ A aplicação decodifica instruções binárias e realiza uma simulação de sua
 
 O código de exemplo é uma sequência de ADDI, ADD, ADD e SUB. A memória final esperada é `{'0x2': 12, '0x1': 6, '0x3': 6}`
 
+### Comandos Suportados
+Atualmente os seguintes comandos são suportados:
+
+ - R-Type: ADD, SLL, SLT, SUB
+ - I-Type: ADDI
+
+### Comandos sendo implementados
+Os seguintes comandos podem ser reconhecidos pelo programa, mas sua execução correta não é garantida:
+
+ - R-Type: XOR, OR, AND
+ - I-Type: XOI, ORI, ANDI
+ - S-Type: SB, SH, SW
 
 César Fukushima Kim Bresciani - 21.00478-0
