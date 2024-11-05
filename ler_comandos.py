@@ -48,6 +48,6 @@ def get_comando_s(linha: str) -> list:
     if COMANDOS_I.get(funct3) is None:
         return '2'
     
-    return ['S', COMANDOS_S.get(funct3), hex(int(rs1, 2)), hex(int(rs2, 2)), int(imm1 + imm2, 2)]
+    return ['S', COMANDOS_S.get(funct3), (int(rs1, 2)), (int(rs2, 2)), int(imm1 + imm2, 2)]
     
 
