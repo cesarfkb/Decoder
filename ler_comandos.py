@@ -39,13 +39,15 @@ def get_comando_i(linha: str) -> list:
     return ['I', COMANDOS_I.get(funct3), hex(int(rs1, 2)), hex(int(rd, 2)), int(imm, 2)]
 
 def get_comando_s(linha: str) -> list:
-    imm = linha[0:12]
-    rs2 = linha[12:17]
-    rs1 = linha[17:22]
-    funct3 = linha[22:25]
+    imm1 = linha[0:7]
+    rs2 = linha[7:12]
+    rs1 = linha[12:17]
+    funct3 = linha[17:20]
+    imm2 = linha[20:25]
     
-    if COMANDOS_S.get(funct3) is None:
+    if COMANDOS_I.get(funct3) is None:
         return '2'
     
-    return ['S', COMANDOS_S.get(funct3), hex(int(rs1, 2)), hex(int(rs2, 2)), int(imm, 2)]
+    return ['S', COMANDOS_S.get(funct3), hex(int(rs1, 2)), hex(int(rs2, 2)), int(imm1 + imm2, 2)]
+    
 
