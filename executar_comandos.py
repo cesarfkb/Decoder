@@ -44,6 +44,12 @@ def executar_comando_r(comandos: list) -> None:
         case 'SLT':
             memoria[rd] = 1 if rs1_dado < rs2_dado else 0
             # print(f'SLT {comandos[2]}, {comandos[3]}, {comandos[4]}\n {memoria}')
+        case 'XOR':
+            memoria[rd] = rs1_dado ^ rs2_dado
+        case 'OR':
+            memoria[rd] = rs1_dado | rs2_dado
+        case 'AND':
+            memoria[rd] = rs1_dado & rs2_dado
         case _:
             ultimo_comando = None
             return
@@ -65,19 +71,32 @@ def executar_comando_i(comandos: list) -> None:
         case 'ADDI':
             memoria[rd] = rs1_dado + imm
             # print(f'ADDI {comandos[2]}, {comandos[3]}, {comandos[4]}\n {memoria}')
+        case 'XORI':
+            memoria[rd] = rs1_dado ^ imm
+        case 'ORI':
+            memoria[rd] = rs1_dado | imm
+        case 'ANDI':
+            memoria[rd] = rs1_dado & imm
         case _:
             ultimo_comando = None
             return
         
     ultimo_comando = f'[{comandos[0]}-type {comandos[1]}]\nrs1: {rs1} valor atual: {rs1_dado}\nimm: {imm}\nrd: {rd} -> {memoria[rd]}'
         
-def executar_comando_s(comando: list) -> None:
+def executar_comando_s(comandos: list) -> None:
+    global ultimo_comando
+    
+    imm = comandos[4]
+    rs1 = comandos[2]
+    rs1_dado = verificar_memoria(rs1)
+    rd = comandos[3]
+    
     match(comando[1]):
         case 'SB':
-            print(f'SB {comando[2]}, {comando[3]}, {comando[4]}')
+            memoria[rs1_dado + imm] = rd
         case 'SH':
-            print(f'SH {comando[2]}, {comando[3]}, {comando[4]}')
+            memoria[rs1_dado + imm] = rd
         case 'SW':
-            print(f'SW {comando[2]}, {comando[3]}, {comando[4]}')
+            memoria[rs1_dado + imm] = rd
         case _:
             return None
