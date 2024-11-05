@@ -91,7 +91,7 @@ def executar_comando_s(comandos: list) -> None:
     rs1_dado = verificar_memoria(rs1)
     rd = comandos[3]
     
-    match(comando[1]):
+    match(comandos[1]):
         case 'SB':
             memoria[rs1_dado + imm] = rd
         case 'SH':
